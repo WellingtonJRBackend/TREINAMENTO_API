@@ -4,6 +4,7 @@ import com.example.well.TREINAMENTO_API.domain.Model.Restaurante;
 import com.example.well.TREINAMENTO_API.domain.Repository.RestauranteRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class RestauranteRepositoryImpl implements RestauranteRepository {
     public Restaurante buscarPorId(Long id) {
         return manager.find(Restaurante.class,id);
     }
-
+    @Transactional
     @Override
     public Restaurante salvar(Restaurante restaurante) {
         return manager.merge(restaurante);
