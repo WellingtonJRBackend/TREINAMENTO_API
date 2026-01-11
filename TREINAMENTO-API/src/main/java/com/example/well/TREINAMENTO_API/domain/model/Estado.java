@@ -1,14 +1,13 @@
-package com.example.well.TREINAMENTO_API.domain.Model;
+package com.example.well.TREINAMENTO_API.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Data
 @Entity
-public class Cozinha {
-
+public class Estado {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,5 +15,4 @@ public class Cozinha {
 
     @Column(nullable = false)
     private String nome;
-
 }

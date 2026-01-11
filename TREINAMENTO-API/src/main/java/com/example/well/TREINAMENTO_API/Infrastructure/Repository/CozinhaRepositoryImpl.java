@@ -1,7 +1,7 @@
 package com.example.well.TREINAMENTO_API.Infrastructure.Repository;
 
-import com.example.well.TREINAMENTO_API.domain.Model.Cozinha;
-import com.example.well.TREINAMENTO_API.domain.Repository.CozinhaRepository;
+import com.example.well.TREINAMENTO_API.domain.model.Cozinha;
+import com.example.well.TREINAMENTO_API.domain.repository.CozinhaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;

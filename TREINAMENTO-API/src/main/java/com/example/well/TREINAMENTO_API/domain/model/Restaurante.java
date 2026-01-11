@@ -1,4 +1,4 @@
-package com.example.well.TREINAMENTO_API.domain.Model;
+package com.example.well.TREINAMENTO_API.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

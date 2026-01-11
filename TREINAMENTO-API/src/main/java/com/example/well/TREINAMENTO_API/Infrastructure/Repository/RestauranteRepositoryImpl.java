@@ -1,7 +1,7 @@
 package com.example.well.TREINAMENTO_API.Infrastructure.Repository;
 
-import com.example.well.TREINAMENTO_API.domain.Model.Restaurante;
-import com.example.well.TREINAMENTO_API.domain.Repository.RestauranteRepository;
+import com.example.well.TREINAMENTO_API.domain.model.Restaurante;
+import com.example.well.TREINAMENTO_API.domain.repository.RestauranteRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;

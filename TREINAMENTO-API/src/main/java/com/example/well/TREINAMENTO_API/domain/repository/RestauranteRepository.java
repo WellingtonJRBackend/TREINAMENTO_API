@@ -1,6 +1,6 @@
-package com.example.well.TREINAMENTO_API.domain.Repository;
+package com.example.well.TREINAMENTO_API.domain.repository;
 
-import com.example.well.TREINAMENTO_API.domain.Model.Restaurante;
+import com.example.well.TREINAMENTO_API.domain.model.Restaurante;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
