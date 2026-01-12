@@ -4,6 +4,8 @@ import com.example.well.TREINAMENTO_API.domain.model.Cozinha;
 import com.example.well.TREINAMENTO_API.domain.repository.CozinhaRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,9 +49,22 @@ public class CozinhaController {
             cozinhaAtual = cozinhaRepository.salvar(cozinhaAtual);
             return ResponseEntity.ok(cozinhaAtual);
         }
+
         return ResponseEntity.notFound().build();
 
     }
 
-
+    @DeleteMapping("/{cozinhaId}")
+    public ResponseEntity<Cozinha> remover(@PathVariable Long cozinhaId) {
+        Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
+        try {
+            if (cozinha != null) {
+                cozinhaRepository.remover(cozinha);
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.notFound().build();
+        } catch (DataIntegrityViolationException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+    }
 }

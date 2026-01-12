@@ -32,6 +32,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
         return manager.merge(cozinha);
     }
 
+    @Transactional
     @Override
     public void remover(Cozinha cozinha) {
         cozinha = buscar(cozinha.getId());
