@@ -4,10 +4,12 @@ import com.example.well.TREINAMENTO_API.domain.model.Restaurante;
 import com.example.well.TREINAMENTO_API.domain.repository.RestauranteRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Repository
 public class RestauranteRepositoryImpl implements RestauranteRepository {
 
     @PersistenceContext
