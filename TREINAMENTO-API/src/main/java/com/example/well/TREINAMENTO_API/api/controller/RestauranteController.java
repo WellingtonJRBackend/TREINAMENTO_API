@@ -8,9 +8,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
+import tools.jackson.databind.ObjectMapper;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/restaurantes")
@@ -65,6 +70,37 @@ public class RestauranteController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PatchMapping("/{restaurateId}")
+    public ResponseEntity<?> atualizarParcial (@PathVariable Long restaurateId, @RequestBody Map<String, Object> canmpos){
+        Restaurante restauranteAtual = restauranteRepository.buscarPorId(restaurateId);
+
+        if (restauranteAtual == null){
+            return ResponseEntity.notFound().build();
+        }
+        merge(canmpos,restauranteAtual);
+
+        return  atualizar(restaurateId, restauranteAtual);
+    }
+
+    private void merge(Map<String, Object> dadosOrigem, Restaurante restauranteDestino){
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        Restaurante restauranteOrigem = objectMapper.convertValue(dadosOrigem, Restaurante.class);
+
+        dadosOrigem.forEach((nomePropriedade, valorPropriedade) ->{
+            Field field = ReflectionUtils.findField(Restaurante.class, nomePropriedade);
+            if (field == null) {
+                throw new IllegalArgumentException(
+                        "Campo '" + nomePropriedade + "' não existe em Restaurante"
+                );
+            }
+            field.setAccessible(true);
+          Object novoValor =  ReflectionUtils.getField(field, restauranteOrigem);
+            ReflectionUtils.setField(field, restauranteDestino, novoValor);
+
+        });
     }
 }
 
