@@ -1,18 +1,15 @@
 package com.example.well.TREINAMENTO_API.domain.repository;
 
 import com.example.well.TREINAMENTO_API.domain.model.Cozinha;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface CozinhaRepository {
+public interface CozinhaRepository  extends JpaRepository<Cozinha, Long> {
 
-    List<Cozinha> listar();
+    //List<Cozinha> listarPorNome(String nome);
 
-    Cozinha buscar(Long id);
 
-    Cozinha salvar(Cozinha cozinha);
-
-    void remover(Long id);
 }

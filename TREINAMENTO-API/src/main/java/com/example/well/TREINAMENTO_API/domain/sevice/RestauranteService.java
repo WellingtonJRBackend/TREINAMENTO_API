@@ -8,6 +8,8 @@ import com.example.well.TREINAMENTO_API.domain.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class RestauranteService {
 
@@ -17,16 +19,16 @@ public class RestauranteService {
     @Autowired
     private CozinhaRepository cozinhaRepository;
 
-    public Restaurante salvar (Restaurante restaurante) {
-        Long cozinhaId = restaurante.getCozinha().getId();
-        Cozinha cozinha = cozinhaRepository.buscar(cozinhaId);
+    public Restaurante salvar(Restaurante restaurante) {
+        if (restaurante.getCozinha() != null) {
+            Cozinha cozinha = cozinhaRepository.findById(restaurante.getCozinha().getId())
+                    .orElseThrow(() -> new EntidadeNaoEncontradaException(
+                            "Cozinha não encontrada"));
 
-        if (cozinha == null) {
-            throw new EntidadeNaoEncontradaException(String.format("Não existe cadastro de cozinha com o código %d", cozinhaId));
+            restaurante.setCozinha(cozinha);
         }
-        restaurante.setCozinha(cozinha);
 
-        return restauranteRepository.salvar(restaurante);
+        return restauranteRepository.save(restaurante);
     }
-    
+
 }
