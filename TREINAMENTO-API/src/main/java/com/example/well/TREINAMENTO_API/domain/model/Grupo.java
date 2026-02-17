@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = false)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Grupo {
 

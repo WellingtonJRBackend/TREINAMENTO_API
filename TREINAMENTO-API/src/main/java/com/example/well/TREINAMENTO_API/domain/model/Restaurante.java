@@ -1,6 +1,7 @@
 package com.example.well.TREINAMENTO_API.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +15,7 @@ import java.util.List;
 
 
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = false)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Restaurante {
 
@@ -29,7 +30,9 @@ public class Restaurante {
     @Column(name = "taxa_frente", nullable = false)
     private BigDecimal taxaFrente;
 
-    @ManyToOne
+   // @JsonIgnore
+    @JsonIgnoreProperties("hibernateLazyInitializer")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cozinha_id", nullable = false)
     private Cozinha cozinha;
 
@@ -47,16 +50,15 @@ public class Restaurante {
     @Column(nullable = false, columnDefinition = "timestamp(0)")
     private LocalDateTime dataAtualizacao;
 
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToMany
     @JoinTable(name = "restaurante_forma_pagamento",
             joinColumns = @JoinColumn(name = "restaurante_id"),
             inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
     private List<FormasPagamento> formasPagamento = new ArrayList<>();
 
-
-    @OneToMany
-    @JoinTable(name = "produtos_restaurante")
+    @JsonIgnore
+    @OneToMany(mappedBy = "restaurante")
     private List<Produto> produtos = new ArrayList<>();
 
 }
