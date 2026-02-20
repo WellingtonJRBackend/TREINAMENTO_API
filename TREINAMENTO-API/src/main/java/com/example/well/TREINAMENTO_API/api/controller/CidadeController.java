@@ -3,7 +3,7 @@ package com.example.well.TREINAMENTO_API.api.controller;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Cidade;
 import com.example.well.TREINAMENTO_API.domain.repository.CidadeRepository;
-import com.example.well.TREINAMENTO_API.domain.sevice.CidadeService;
+import com.example.well.TREINAMENTO_API.domain.service.CidadeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

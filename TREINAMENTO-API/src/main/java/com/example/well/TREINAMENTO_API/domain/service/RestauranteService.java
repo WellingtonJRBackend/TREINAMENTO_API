@@ -1,4 +1,4 @@
-package com.example.well.TREINAMENTO_API.domain.sevice;
+package com.example.well.TREINAMENTO_API.domain.service;
 
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Cozinha;
@@ -7,8 +7,6 @@ import com.example.well.TREINAMENTO_API.domain.repository.CozinhaRepository;
 import com.example.well.TREINAMENTO_API.domain.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class RestauranteService {

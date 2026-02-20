@@ -3,7 +3,7 @@ package com.example.well.TREINAMENTO_API.api.controller;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Restaurante;
 import com.example.well.TREINAMENTO_API.domain.repository.RestauranteRepository;
-import com.example.well.TREINAMENTO_API.domain.sevice.RestauranteService;
+import com.example.well.TREINAMENTO_API.domain.service.RestauranteService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

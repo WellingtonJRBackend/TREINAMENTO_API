@@ -1,4 +1,4 @@
-package com.example.well.TREINAMENTO_API.domain.sevice;
+package com.example.well.TREINAMENTO_API.domain.service;
 
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeEmUsoException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
@@ -7,7 +7,6 @@ import com.example.well.TREINAMENTO_API.domain.repository.EstadoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service

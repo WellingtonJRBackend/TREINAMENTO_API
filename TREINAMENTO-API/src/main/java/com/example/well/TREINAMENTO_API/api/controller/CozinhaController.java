@@ -4,7 +4,7 @@ import com.example.well.TREINAMENTO_API.domain.exception.EntidadeEmUsoException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Cozinha;
 import com.example.well.TREINAMENTO_API.domain.repository.CozinhaRepository;
-import com.example.well.TREINAMENTO_API.domain.sevice.CozinhaService;
+import com.example.well.TREINAMENTO_API.domain.service.CozinhaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
