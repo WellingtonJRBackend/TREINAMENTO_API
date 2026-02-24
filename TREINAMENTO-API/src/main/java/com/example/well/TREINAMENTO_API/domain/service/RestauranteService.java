@@ -1,6 +1,8 @@
 package com.example.well.TREINAMENTO_API.domain.service;
 
+import com.example.well.TREINAMENTO_API.domain.exception.CozinhaNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
+import com.example.well.TREINAMENTO_API.domain.exception.RestauranteNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Cozinha;
 import com.example.well.TREINAMENTO_API.domain.model.Restaurante;
 import com.example.well.TREINAMENTO_API.domain.repository.CozinhaRepository;
@@ -19,9 +21,9 @@ public class RestauranteService {
 
     public Restaurante salvar(Restaurante restaurante) {
         if (restaurante.getCozinha() != null) {
-            Cozinha cozinha = cozinhaRepository.findById(restaurante.getCozinha().getId())
-                    .orElseThrow(() -> new EntidadeNaoEncontradaException(
-                            "Cozinha não encontrada"));
+            Long cozinhaId = restaurante.getCozinha().getId();
+            Cozinha cozinha = cozinhaRepository.findById(cozinhaId)
+                            .orElseThrow(()-> new CozinhaNaoEncontradaException(cozinhaId));
 
             restaurante.setCozinha(cozinha);
         }

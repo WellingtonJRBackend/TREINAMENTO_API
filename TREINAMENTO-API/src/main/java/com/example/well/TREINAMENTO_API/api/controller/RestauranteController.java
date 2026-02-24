@@ -1,5 +1,6 @@
 package com.example.well.TREINAMENTO_API.api.controller;
 
+import com.example.well.TREINAMENTO_API.domain.exception.CozinhaNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Restaurante;
 import com.example.well.TREINAMENTO_API.domain.repository.RestauranteRepository;
@@ -34,7 +35,7 @@ public class RestauranteController {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(restaurante);
 
-        } catch (EntidadeNaoEncontradaException e) {
+        } catch (CozinhaNaoEncontradaException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -63,20 +64,20 @@ public class RestauranteController {
                 return ResponseEntity.ok(restauranteSalvar);
             }
 
-        } catch (EntidadeNaoEncontradaException e) {
+        } catch (CozinhaNaoEncontradaException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.notFound().build();
     }
 
     @PatchMapping("/{restaurateId}")
-    public ResponseEntity<?> atualizarParcial(@PathVariable Long restaurateId, @RequestBody Map<String, Object> canmpos) {
+    public ResponseEntity<?> atualizarParcial(@PathVariable Long restaurateId, @RequestBody Map<String, Object> campos) {
         Optional<Restaurante> restauranteAtual = restauranteRepository.findById(restaurateId);
 
         if (restauranteAtual.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        merge(canmpos, restauranteAtual.get());
+        merge(campos, restauranteAtual.get());
 
         return atualizar(restaurateId, restauranteAtual.get());
     }

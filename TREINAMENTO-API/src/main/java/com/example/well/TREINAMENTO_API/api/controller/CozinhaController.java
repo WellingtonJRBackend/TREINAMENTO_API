@@ -1,5 +1,6 @@
 package com.example.well.TREINAMENTO_API.api.controller;
 
+import com.example.well.TREINAMENTO_API.domain.exception.CozinhaNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeEmUsoException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Cozinha;
@@ -63,12 +64,13 @@ public class CozinhaController {
 
             return ResponseEntity.noContent().build();
 
-        } catch (EntidadeNaoEncontradaException e) {
+        } catch (CozinhaNaoEncontradaException e) {
             return ResponseEntity.notFound().build();
 
         } catch (EntidadeEmUsoException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
+
     }
 
 }

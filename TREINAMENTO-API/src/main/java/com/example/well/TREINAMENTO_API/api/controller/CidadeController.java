@@ -1,6 +1,9 @@
 package com.example.well.TREINAMENTO_API.api.controller;
 
+import com.example.well.TREINAMENTO_API.domain.exception.CidadeNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
+import com.example.well.TREINAMENTO_API.domain.exception.EstadoNaoEncontradaException;
+import com.example.well.TREINAMENTO_API.domain.exception.NegocioException;
 import com.example.well.TREINAMENTO_API.domain.model.Cidade;
 import com.example.well.TREINAMENTO_API.domain.repository.CidadeRepository;
 import com.example.well.TREINAMENTO_API.domain.service.CidadeService;
@@ -43,7 +46,7 @@ public class CidadeController {
 
             return ResponseEntity.status(HttpStatus.CREATED).body(cidade);
 
-        } catch (EntidadeNaoEncontradaException e) {
+        } catch (EstadoNaoEncontradaException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -58,8 +61,8 @@ public class CidadeController {
                 Cidade cidadeSalvar = cidadeServices.salvar(cidadeAtual.get());
                 return ResponseEntity.ok(cidadeSalvar);
             }
-        } catch (EntidadeNaoEncontradaException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (EstadoNaoEncontradaException e) {
+            new NegocioException(e.getMessage(), e);
         }
         return ResponseEntity.notFound().build();
     }
@@ -71,7 +74,7 @@ public class CidadeController {
 
             return ResponseEntity.noContent().build();
 
-        } catch (EntidadeNaoEncontradaException e) {
+        } catch (CidadeNaoEncontradaException e) {
             return ResponseEntity.notFound().build();
         }
     }

@@ -2,6 +2,7 @@ package com.example.well.TREINAMENTO_API.domain.service;
 
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeEmUsoException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
+import com.example.well.TREINAMENTO_API.domain.exception.EstadoNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Estado;
 import com.example.well.TREINAMENTO_API.domain.repository.EstadoRepository;
 import jakarta.transaction.Transactional;
@@ -21,8 +22,7 @@ public class EstadoService {
 
     @Transactional
     public void excluir(Long estadoId) {
-        Estado estado = estadoRepository.findById(estadoId).orElseThrow(() -> new EntidadeNaoEncontradaException(
-                String.format("Não existe estado cadastrado com o códico %d!", estadoId)));
+        Estado estado = estadoRepository.findById(estadoId).orElseThrow(() -> new EstadoNaoEncontradaException(estadoId));
         try {
             estadoRepository.deleteById(estadoId);
             estadoRepository.flush();

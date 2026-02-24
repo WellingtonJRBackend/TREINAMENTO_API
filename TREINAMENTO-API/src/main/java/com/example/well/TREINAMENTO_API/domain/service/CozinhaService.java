@@ -1,5 +1,6 @@
 package com.example.well.TREINAMENTO_API.domain.service;
 
+import com.example.well.TREINAMENTO_API.domain.exception.CozinhaNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeEmUsoException;
 import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Cozinha;
@@ -22,8 +23,7 @@ public class CozinhaService {
     @Transactional
     public void excluir(Long cozinhaId) {
         Cozinha cozinha = cozinhaRepository.findById(cozinhaId)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException(
-                        String.format("Não existe um cadastro de cozinha com o código %d", cozinhaId)));
+                .orElseThrow(() -> new CozinhaNaoEncontradaException(cozinhaId));
         try {
             cozinhaRepository.delete(cozinha);
             cozinhaRepository.flush();
