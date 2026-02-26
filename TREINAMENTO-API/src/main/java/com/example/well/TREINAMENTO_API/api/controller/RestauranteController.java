@@ -1,17 +1,18 @@
 package com.example.well.TREINAMENTO_API.api.controller;
 
 import com.example.well.TREINAMENTO_API.domain.exception.CozinhaNaoEncontradaException;
-import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaException;
 import com.example.well.TREINAMENTO_API.domain.model.Restaurante;
 import com.example.well.TREINAMENTO_API.domain.repository.RestauranteRepository;
 import com.example.well.TREINAMENTO_API.domain.service.RestauranteService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
+
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,7 @@ public class RestauranteController {
     private RestauranteService restauranteService;
 
     @PostMapping
-    public ResponseEntity<?> adicionar(@RequestBody Restaurante restaurante) {
+    public ResponseEntity<?> adicionar(@RequestBody @Valid Restaurante restaurante) {
         try {
             restaurante = restauranteService.salvar(restaurante);
 
