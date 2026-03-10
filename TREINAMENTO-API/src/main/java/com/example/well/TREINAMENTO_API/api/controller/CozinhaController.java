@@ -6,6 +6,7 @@ import com.example.well.TREINAMENTO_API.domain.exception.EntidadeNaoEncontradaEx
 import com.example.well.TREINAMENTO_API.domain.model.Cozinha;
 import com.example.well.TREINAMENTO_API.domain.repository.CozinhaRepository;
 import com.example.well.TREINAMENTO_API.domain.service.CozinhaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class CozinhaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cozinha adicionar(@RequestBody Cozinha cozinha) {
+    public Cozinha adicionar(@RequestBody @Valid Cozinha cozinha) {
         return cozinhaService.salvar(cozinha);
     }
 

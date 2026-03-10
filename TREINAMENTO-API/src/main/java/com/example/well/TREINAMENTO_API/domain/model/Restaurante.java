@@ -1,8 +1,9 @@
 package com.example.well.TREINAMENTO_API.domain.model;
 
+import com.example.well.TREINAMENTO_API.Validation.Groups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -27,17 +28,17 @@ public class Restaurante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(groups = Groups.CadastroRestaurante.class)
     @Column(nullable = false)
     private String nome;
 
-    @PositiveOrZero
-    @Column(name = "taxa_frente", nullable = false)
-    private BigDecimal taxaFrente;
+    @PositiveOrZero(groups = Groups.CadastroRestaurante.class)
+    @Column(name = "taxa_frete", nullable = false)
+    private BigDecimal taxaFrete;
 
-   // @JsonIgnore
-    @JsonIgnoreProperties("hibernateLazyInitializer")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Valid
+    @NotNull(groups = Groups.CadastroRestaurante.class)
+    @ManyToOne
     @JoinColumn(name = "cozinha_id", nullable = false)
     private Cozinha cozinha;
 

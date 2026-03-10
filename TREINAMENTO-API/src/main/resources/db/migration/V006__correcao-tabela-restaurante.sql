@@ -1,0 +1,1 @@
+ALTER TABLE restaurante RENAME COLUMN taxa_frente TO taxa_frete;
